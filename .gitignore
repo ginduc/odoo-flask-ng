@@ -1,8 +1,8 @@
 .DS_Store
 *.pyc
 *.pyo
-venv
-venv*
+env
+env*
 dist
 *.egg
 *.egg-info
