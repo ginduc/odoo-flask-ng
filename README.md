@@ -8,10 +8,9 @@ Dev Notes
 2. Activate virtualenv
 
     source venv/bin/activate
-
-    # Deactivate / Exit venv
+	# Deactivate / Exit venv
     deactivate
 
-3. Install Flask
+3. Install deps
 
-    pip install flask
+    pip install -r requirements.txt
