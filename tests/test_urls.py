@@ -46,3 +46,11 @@ class TestURLs:
 
         rv = testapp.get('/restricted')
         assert rv.status_code == 200
+
+    def test_sender_search(self, testapp):
+        """ Test that the sender search page is accessible
+            if the user is logged in (TODO)
+        """
+
+        rv = testapp.get('/sender/search')
+        assert rv.status_code == 200

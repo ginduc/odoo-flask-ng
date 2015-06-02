@@ -1,15 +1,17 @@
 {%extends "base.html" %}
 
-{%block title %}Flask Login Example{% endblock %}
+{%block title %}Search{% endblock %}
 
 {%block body %}
   <div class="row">
     <div class="col-lg-6">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search Senders">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button">Go!</button>
-        </span>
+        <form role="form" action="/sender/search">
+          <input type="text" id="keyword" name="keyword" placeholder="Search senders" class="form-control">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go!</button>
+          </span>
+        </form>
       </div><!-- /input-group -->
     </div><!-- /.col-lg-6 -->
   </div><!-- /.row -->

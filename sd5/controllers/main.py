@@ -43,4 +43,15 @@ def restricted():
 
 @main.route("/sender/search")
 def searchSender():
-    return render_template("sender_search.html")
+    keyword = request.args.get('keyword')
+
+    if keyword is None:
+        flash("Search keywords must have at least three (3) characters", "warning")
+    else:
+        if len(keyword) < 3:
+            flash("Search keywords must have at least three (3) characters", "warning")
+
+    #data = searchByKeyword(keyword)
+    data = []
+
+    return render_template("sender_search.html", data=data)
