@@ -40,3 +40,7 @@ def logout():
 @login_required
 def restricted():
     return "You can only see this if you are logged in!", 200
+
+@main.route("/sender/search")
+def searchSender():
+    return render_template("sender_search.html")
