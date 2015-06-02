@@ -41,6 +41,7 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return '<User %r>' % self.username
 
+
 class Recipient(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     firstname = db.Column(db.String())

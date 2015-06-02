@@ -3,6 +3,7 @@
 
 import pytest
 
+
 @pytest.mark.usefixtures("testapp")
 class TestSenderSearch:
     def test_search(self, testapp):

@@ -4,6 +4,7 @@ from wtforms import validators
 
 from sd5.models import User, Recipient
 
+
 class LoginForm(Form):
     username = TextField(u'Username', validators=[validators.required()])
     password = PasswordField(u'Password', validators=[validators.optional()])
@@ -28,6 +29,7 @@ class LoginForm(Form):
 
         return True
 
+
 class RecipientForm(Form):
     firstname = TextField(u'First Name', validators=[validators.required()])
     lastname = TextField(u'Last Name', validators=[validators.required()])
@@ -47,4 +49,5 @@ class RecipientForm(Form):
         return True
 
     def to_model(self):
-        return Recipient(self.firstname.data, self.lastname.data, self.mobileNo.data, self.address.data)
+        return Recipient(self.firstname.data, self.lastname.data,
+                         self.mobileNo.data, self.address.data)

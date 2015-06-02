@@ -44,27 +44,31 @@ def logout():
 def restricted():
     return "You can only see this if you are logged in!", 200
 
+
 # ======================================================
 # Sender
-# ====================================================== 
+# ======================================================
 @main.route("/sender/search")
 def search_sender():
     keyword = request.args.get('keyword')
 
     if keyword is None:
-        flash("Search keywords must have at least three (3) characters", "warning")
+        flash("Search keywords must have at least three (3) characters",
+              "warning")
     else:
         if len(keyword) < 3:
-            flash("Search keywords must have at least three (3) characters", "warning")
+            flash("Search keywords must have at least three (3) characters",
+                  "warning")
 
-    #data = searchByKeyword(keyword)
+    # data = searchByKeyword(keyword)
     data = []
 
     return render_template("sender_search.html", data=data)
 
+
 # ======================================================
 # Recipient
-# ====================================================== 
+# ======================================================
 @main.route("/recipient/new", methods=["GET", "POST"])
 def new_recipient():
     form = RecipientForm()
@@ -72,7 +76,7 @@ def new_recipient():
     if form.validate_on_submit():
         recipient = form.to_model()
         log.info("recipient: " + str(recipient))
-        
+
         flash("Recipient was successfully saved!", "success")
-        
+
     return render_template("recipient_form.html", form=form)
