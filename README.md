@@ -37,14 +37,18 @@ This flask app is based on the cookiecutter template, [Flask Foundation](https:/
 
 ##### Other commands
 
-1. Execute unit tests:
+Execute unit tests:
 
     `make test`
 
-2. Execute code linting tool:
+Execute code linting tool:
 
 	`make lint`
 
-3. Clean slate:
+Clean slate:
 
     `make clean deps`
+
+Display routes:
+
+    `./manage.py show-urls`
