@@ -4,9 +4,6 @@ from wtforms import validators
 
 from sd5.models import User
 
-import logging
-log = logging.getLogger('werkzeug')
-
 class LoginForm(Form):
     username = TextField(u'Username', validators=[validators.required()])
     password = PasswordField(u'Password', validators=[validators.optional()])
