@@ -40,3 +40,19 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return '<User %r>' % self.username
+
+class Recipient(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    firstname = db.Column(db.String())
+    lastname = db.Column(db.String())
+    mobileNo = db.Column(db.String())
+    address = db.Column(db.String())
+
+    def __init__(self, firstname, lastname, mobileNo, address):
+        self.firstname = firstname
+        self.lastname = lastname
+        self.mobileNo = mobileNo
+        self.address = address
+
+    def __repr__(self):
+        return '<Recipient Name: %s %s>' % (self.firstname, self.lastname)

@@ -2,8 +2,11 @@ from flask import Blueprint, render_template, flash, request, redirect, url_for
 from flask.ext.login import login_user, logout_user, login_required
 
 from sd5.extensions import cache
-from sd5.forms import LoginForm
+from sd5.forms import LoginForm, RecipientForm
 from sd5.models import User
+
+import logging
+log = logging.getLogger('werkzeug')
 
 main = Blueprint('main', __name__)
 
@@ -41,8 +44,11 @@ def logout():
 def restricted():
     return "You can only see this if you are logged in!", 200
 
+# ======================================================
+# Sender
+# ====================================================== 
 @main.route("/sender/search")
-def searchSender():
+def search_sender():
     keyword = request.args.get('keyword')
 
     if keyword is None:
@@ -55,3 +61,18 @@ def searchSender():
     data = []
 
     return render_template("sender_search.html", data=data)
+
+# ======================================================
+# Recipient
+# ====================================================== 
+@main.route("/recipient/new", methods=["GET", "POST"])
+def new_recipient():
+    form = RecipientForm()
+
+    if form.validate_on_submit():
+        recipient = form.to_model()
+        log.info("recipient: " + str(recipient))
+        
+        flash("Recipient was successfully saved!", "success")
+        
+    return render_template("recipient_form.html", form=form)

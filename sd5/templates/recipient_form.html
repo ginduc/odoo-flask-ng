@@ -1,0 +1,59 @@
+{%extends "base.html" %}
+
+{%block title %}Recipient{% endblock %}
+
+{%block body %}
+	<h1 class="text-center">Recipient Information</h1>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form role="form" action="{{ url_for('.new_recipient') }}" method="post">
+                {{ form.hidden_tag() }}
+
+                <div class="form-group">
+                    {{ form.firstname.label }}
+                    {% if form.firstname.errors %}
+                        {% for e in form.firstname.errors %}
+                            <p class="help-block">{{ e }}</p>
+                        {% endfor %}
+                    {% endif %}
+                    {{ form.firstname(class_="form-control") }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.lastname.label }}
+                    {% if form.lastname.errors %}
+                        {% for e in form.lastname.errors %}
+                            <p class="help-block">{{ e }}</p>
+                        {% endfor %}
+                    {% endif %}
+                    {{ form.lastname(class_="form-control") }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.mobileNo.label }}
+                    {% if form.mobileNo.errors %}
+                        {% for e in form.mobileNo.errors %}
+                            <p class="help-block">{{ e }}</p>
+                        {% endfor %}
+                    {% endif %}
+                    {{ form.mobileNo(class_="form-control") }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.address.label }}
+                    {% if form.address.errors %}
+                        {% for e in form.address.errors %}
+                            <p class="help-block">{{ e }}</p>
+                        {% endfor %}
+                    {% endif %}
+                    {{ form.address(class_="form-control") }}
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+{%endblock %}

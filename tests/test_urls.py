@@ -54,3 +54,11 @@ class TestURLs:
 
         rv = testapp.get('/sender/search')
         assert rv.status_code == 200
+
+    def test_new_recipient(self, testapp):
+        """ Test that the new recipient form is accessible
+            if the user is logged in (TODO)
+        """
+
+        rv = testapp.get('/recipient/new')
+        assert rv.status_code == 200

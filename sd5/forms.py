@@ -1,8 +1,8 @@
 from flask_wtf import Form
-from wtforms import TextField, PasswordField
+from wtforms import TextField, PasswordField, TextAreaField
 from wtforms import validators
 
-from sd5.models import User
+from sd5.models import User, Recipient
 
 class LoginForm(Form):
     username = TextField(u'Username', validators=[validators.required()])
@@ -27,3 +27,24 @@ class LoginForm(Form):
             return False
 
         return True
+
+class RecipientForm(Form):
+    firstname = TextField(u'First Name', validators=[validators.required()])
+    lastname = TextField(u'Last Name', validators=[validators.required()])
+    mobileNo = TextField(u'Mobile No', validators=[validators.required()])
+    address = TextAreaField(u'Address', validators=[validators.optional()])
+
+    def validate(self):
+        check_validate = super(RecipientForm, self).validate()
+
+        if not check_validate:
+            return False
+
+        # Check if recipient name exists already
+
+        # Check if mobile no exists already
+
+        return True
+
+    def to_model(self):
+        return Recipient(self.firstname.data, self.lastname.data, self.mobileNo.data, self.address.data)
