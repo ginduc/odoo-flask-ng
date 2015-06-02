@@ -5,14 +5,14 @@
 {%block body %}
   <div class="row">
     <div class="col-lg-6">
-      <div class="input-group">
-        <form role="form" action="/sender/search">
-          <input type="text" id="keyword" name="keyword" placeholder="Search senders" class="form-control">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="submit">Go!</button>
-          </span>
-        </form>
-      </div><!-- /input-group -->
+      <form role="form" action="/sender/search">
+        <div class="input-group">
+            <input type="text" id="keyword" name="keyword" placeholder="Search senders" class="form-control">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">Go!</button>
+            </span>
+        </div><!-- /input-group -->
+      </form>
     </div><!-- /.col-lg-6 -->
   </div><!-- /.row -->
 {%endblock %}
