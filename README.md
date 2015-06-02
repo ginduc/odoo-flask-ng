@@ -1,17 +1,50 @@
-#Flask Foundation
-[![Build Status](https://travis-ci.org/JackStouffer/Flask-Foundation.png)](https://travis-ci.org/JackStouffer/Flask-Foundation)
+Dev Notes
+=========
 
-Documentation is located at [https://jackstouffer.github.io/Flask-Foundation/](https://jackstouffer.github.io/Flask-Foundation/)
+### Flask App
 
-Flask Foundation is a solid foundation for flask applications, built with best practices, that you can easily construct your website/webapp off of. Flask Foundation is different from most Flask frameworks as it does not assume anything about your development or production environments. Flask Foundation is platform agnostic in this respect.
+This flask app is based on the cookiecutter template, [Flask Foundation](https://github.com/JackStouffer/Flask-Foundation.git)
 
-Built off of the [bootstrapy project](https://github.com/kirang89/bootstrapy)
+##### Initialization
 
-Best practices were learned from:
-* [Creating Websites With Flask](http://maximebf.com/blog/2012/10/building-websites-in-python-with-flask/)
-* [Getting Bigger With Flask](http://maximebf.com/blog/2012/11/getting-bigger-with-flask/)
-* [Larger Applications With Flask](http://flask.pocoo.org/docs/patterns/packages/).
+1. Run required services first:
 
-## License
+    `docker-compose up`
 
-Flask-Foundation is licensed under the BSD license. For more info see LICENSE.md
+2. On first run, create your local virtualenv:
+
+    `make env`
+
+2. Activate local virtualenv:
+
+    `source env/bin/activate`
+
+3. Run the flask app:
+
+    `./manage.py server`
+
+4. Preview in browser: http://127.0.0.1:5000
+
+##### Shutting down
+
+1. `CTRL + C` in the flask app console
+
+2. `deactivate` your virtualenv
+
+3. Stop required services:
+
+    `docker-compose stop`
+
+##### Other commands
+
+1. Execute unit tests:
+
+    `make test`
+
+2. Execute code linting tool:
+
+	`make lint`
+
+3. Clean slate:
+
+    `make clean deps`
