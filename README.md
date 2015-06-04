@@ -39,16 +39,24 @@ This flask app is based on the cookiecutter template, [Flask Foundation](https:/
 
 Execute unit tests:
 
-    `make test`
+    make test
 
 Execute code linting tool:
 
-	`make lint`
+	make lint
 
 Clean slate:
 
-    `make clean deps`
+    make clean deps
 
 Display routes:
 
-    `./manage.py show-urls`
+    ./manage.py show-urls
+
+##### Local Odoo
+
+    # Admin creds:
+    admin:admin
+
+    # User creds:
+    demo:demo
