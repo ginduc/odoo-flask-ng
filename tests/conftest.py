@@ -24,3 +24,8 @@ def testapp(request):
     request.addfinalizer(teardown)
 
     return client
+
+@pytest.fixture()
+def testappcfg():
+    app = create_app('sd5.settings.TestConfig', env='dev')
+    return app
