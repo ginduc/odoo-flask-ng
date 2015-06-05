@@ -27,6 +27,8 @@ def create_partner(conn, partner):
     models = xmlrpclib.ServerProxy('{}/xmlrpc/2/object'.format(conn.url))
     id = models.execute_kw(conn.db, conn.uid, conn.password, 'res.partner', 'create', [{
         'name': partner.name,
+        'is_company': True,
+        'customer': True
     }])
 
     return id
