@@ -5,7 +5,7 @@ import pytest
 
 
 @pytest.mark.usefixtures("testapp")
-class TestSenderSearch:
+class TestSenderRoutes:
     def test_search(self, testapp):
         """ Tests if the search form functions """
 
@@ -25,3 +25,11 @@ class TestSenderSearch:
 
         assert rv.status_code == 200
         assert 'Search keywords must have at least three (3) characters' in str(rv.data)
+
+    def test_listing(self, testapp):
+        """ Tests if the sender listing functions """
+
+        rv = testapp.get('/senders', None, follow_redirects=True)
+
+        assert rv.status_code == 200
+        assert len(rv.data) > 0

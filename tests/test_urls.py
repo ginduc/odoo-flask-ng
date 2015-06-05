@@ -62,3 +62,11 @@ class TestURLs:
 
         rv = testapp.get('/recipient/new')
         assert rv.status_code == 200
+
+    def test_list_senders(self, testapp):
+        """ Test that the sender listing is accessible
+            if the user is logged in (TODO)
+        """
+
+        rv = testapp.get('/senders')
+        assert rv.status_code == 200

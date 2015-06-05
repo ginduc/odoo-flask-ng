@@ -1,0 +1,24 @@
+{%extends "base.html" %}
+
+{%block title %}Search{% endblock %}
+
+{%block body %}
+  <div class="row">
+    <div class="col-lg-6">
+      <table class="table table-striped">
+        <thead>
+          <th>ID</th>
+          <th>COMPANY NAME</th>  
+        </thead>
+        <tbody>
+          {% for row in data %}
+          <tr>
+            <td>{{ row.id }}</td>
+            <td>{{ row.name }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div><!-- /.col-lg-6 -->
+  </div><!-- /.row -->
+{%endblock %}

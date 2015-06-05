@@ -1,9 +1,12 @@
-from flask import Blueprint, render_template, flash, request, redirect, url_for
+from flask import Blueprint, render_template, flash, request, redirect, url_for, current_app
 from flask.ext.login import login_user, logout_user, login_required
 
 from sd5.extensions import cache
 from sd5.forms import LoginForm, RecipientForm
 from sd5.models import User
+
+from odoorpc import Connection
+from odoorpc.partner_svc import list_partners
 
 import logging
 log = logging.getLogger('werkzeug')
@@ -63,8 +66,14 @@ def search_sender():
     # data = searchByKeyword(keyword)
     data = []
 
-    return render_template("sender_search.html", data=data)
+    return render_template("sender_listing.html", data=data)
 
+@main.route("/senders")
+def list_sender():
+    conn = Connection(current_app.config)
+    data = list_partners(conn)
+
+    return render_template("sender_listing.html", data=data)
 
 # ======================================================
 # Recipient
