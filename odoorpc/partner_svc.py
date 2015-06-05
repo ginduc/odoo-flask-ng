@@ -17,7 +17,7 @@ def list_partners(conn):
 	senders = []
 	if partners is not None:
 		for p in partners:
-			senders.append(Sender(p['name']))
+			senders.append(Sender(p['id'], p['name']))
 		
 	return senders
 
@@ -34,7 +34,7 @@ def get_partner(conn, partner_id):
 	p = models.execute_kw(conn.db, conn.uid, conn.password, 'res.partner', 'read', [partner_id])
 	
 	if p:
-		return Sender(p['name'])
+		return Sender(p['id'], p['name'])
 	else:
 		return None
 
@@ -49,7 +49,7 @@ def delete_partner(conn, partner_id):
 	else:
 		return False
 
-def search_partner(conn, keyword):
+def search_partners(conn, keyword):
 	models = xmlrpclib.ServerProxy('{}/xmlrpc/2/object'.format(conn.url))
 	partners = models.execute_kw(conn.db, conn.uid, conn.password,
     	'res.partner', 'search_read', [[['name', '=', keyword]]])
@@ -57,6 +57,20 @@ def search_partner(conn, keyword):
 	senders = []
 	if partners is not None:
 		for p in partners:
-			senders.append(Sender(p['name']))
+			senders.append(Sender(p['id'], p['name']))
 		
 	return senders
+
+def update_partner(conn, partner):
+	models = xmlrpclib.ServerProxy('{}/xmlrpc/2/object'.format(conn.url))
+	p = models.execute_kw(conn.db, conn.uid, conn.password, 'res.partner', 'read', [partner.id])
+	
+	if p:
+		models.execute_kw(conn.db, conn.uid, conn.password, 'res.partner', 'write', [[partner.id], {
+    		'name': partner.name
+		}])
+		# get record name after having changed it
+		search = models.execute_kw(conn.db, conn.uid, conn.password, 'res.partner', 'name_get', [[partner.id]])
+		return len(search) == 1
+	else:
+		return False

@@ -9,8 +9,9 @@ from odoorpc.partner_svc import (
 	list_partners, 
 	create_partner,
 	get_partner,
-	search_partner,
-	delete_partner
+	search_partners,
+	delete_partner,
+	update_partner
 ) 
 
 
@@ -26,20 +27,26 @@ class TestOdooSvc:
         assert partners is not None
         assert len(partners) > 0
 
-    def test_create_sender(self, testappcfg):
+    def test_create_update_delete_sender(self, testappcfg):
     	""" Test create sender on Odoo """
 
     	test_sender_name = "Ned Flanders"
 
         conn = Connection(testappcfg.config)
-        sender = Sender(test_sender_name)
+        sender = Sender(None, test_sender_name)
         sender_id = create_partner(conn, sender)
 
         assert sender_id is not None
         assert sender_id > 0
 
-        assert get_partner(conn, sender_id) is not None
-        assert len(search_partner(conn, test_sender_name)) > 0
+        persistent = get_partner(conn, sender_id)
+        assert persistent is not None
+        assert persistent.id is not None
+        assert persistent.name is not None
+
+        persistent.name = "Maud Flanders"
+        assert update_partner(conn, persistent) == True
+        assert len(search_partners(conn, persistent.name)) > 0
 
         assert delete_partner(conn, sender_id) == True
 
@@ -49,6 +56,13 @@ class TestOdooSvc:
         conn = Connection(testappcfg.config)
 
         assert get_partner(conn, -1) is None
+
+    def test_update_partner_fail(self, testappcfg):
+    	""" Test failed update partner on Odoo """
+
+        conn = Connection(testappcfg.config)
+
+        assert update_partner(conn, Sender(-1, None)) == False
 
     def test_delete_partner_fail(self, testappcfg):
     	""" Test failed delete partner on Odoo """
@@ -62,4 +76,4 @@ class TestOdooSvc:
 
         conn = Connection(testappcfg.config)
 
-        assert len(search_partner(conn, "Kingslayer Inc")) == 0
+        assert len(search_partners(conn, "Kingslayer Inc")) == 0
