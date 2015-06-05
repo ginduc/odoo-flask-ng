@@ -43,8 +43,8 @@ def delete_partner(conn, partner_id):
 	p = models.execute_kw(conn.db, conn.uid, conn.password, 'res.partner', 'read', [partner_id])
 	
 	if p:
-		models.execute_kw(db, uid, password, 'res.partner', 'unlink', [[partner_id]])
-		search = models.execute_kw(db, uid, password, 'res.partner', 'search', [[['id', '=', partner_id]]])
+		models.execute_kw(conn.db, conn.uid, conn.password, 'res.partner', 'unlink', [[partner_id]])
+		search = models.execute_kw(conn.db, conn.uid, conn.password, 'res.partner', 'search', [[['id', '=', partner_id]]])
 		return len(search) == 0
 	else:
 		return False
