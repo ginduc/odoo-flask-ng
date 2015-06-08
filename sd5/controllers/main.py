@@ -2,11 +2,11 @@ from flask import Blueprint, render_template, flash, request, redirect, url_for,
 from flask.ext.login import login_user, logout_user, login_required
 
 from sd5.extensions import cache
-from sd5.forms import LoginForm, RecipientForm
-from sd5.models import User
+from sd5.forms import LoginForm, RecipientForm, SenderForm
+from sd5.models import User, Sender
 
 from odoorpc import Connection
-from odoorpc.partner_svc import list_partners
+from odoorpc.partner_svc import list_partners,create_partner
 
 import logging
 log = logging.getLogger('werkzeug')
@@ -47,7 +47,6 @@ def logout():
 def restricted():
     return "You can only see this if you are logged in!", 200
 
-
 # ======================================================
 # Sender
 # ======================================================
@@ -75,6 +74,15 @@ def list_sender():
     data = list_partners(conn)
 
     return render_template("sender_listing.html", data=data)
+
+@main.route("/senders/new", methods=["GET", "POST"])
+def create_sender():
+    form = SenderForm()
+    if form.validate_on_submit():
+        sender = form.to_model()
+        flash("Recipient was successfully saved!", "success")
+    return render_template("sender_form.html", form=form)
+
 
 # ======================================================
 # Recipient

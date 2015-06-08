@@ -1,9 +1,11 @@
 from flask_wtf import Form
 from wtforms import TextField, PasswordField, TextAreaField
 from wtforms import validators
+from flask import current_app
+from sd5.models import User, Recipient, Sender
 
-from sd5.models import User, Recipient
-
+from odoorpc import Connection
+from odoorpc.partner_svc import create_partner
 
 class LoginForm(Form):
     username = TextField(u'Username', validators=[validators.required()])
@@ -29,6 +31,20 @@ class LoginForm(Form):
 
         return True
 
+class SenderForm(Form):
+    name = TextField(u'Company Name', validators=[validators.required()])
+
+    def validate(self):
+        check_validate = super(SenderForm, self).validate()
+        if not check_validate:
+            return False
+        return True
+
+    def to_model(self):
+        conn = Connection(current_app.config)
+        sender = Sender(0,self.name.data)
+        data = create_partner(conn, sender)
+        return True
 
 class RecipientForm(Form):
     firstname = TextField(u'First Name', validators=[validators.required()])

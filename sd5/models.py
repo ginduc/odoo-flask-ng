@@ -58,7 +58,6 @@ class Recipient(db.Model):
     def __repr__(self):
         return '<Recipient Name: %s %s>' % (self.firstname, self.lastname)
 
-
 class Sender(object):
     def __init__(self, id, name):
         self.id = id
