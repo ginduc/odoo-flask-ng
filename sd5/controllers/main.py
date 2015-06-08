@@ -54,6 +54,7 @@ def restricted():
 @main.route("/sender/search")
 def search_sender():
     keyword = request.args.get('keyword')
+    data = []
 
     if keyword is None:
         flash("Search keywords must have at least three (3) characters",
@@ -62,9 +63,9 @@ def search_sender():
         if len(keyword) < 3:
             flash("Search keywords must have at least three (3) characters",
                   "warning")
-
-    # data = searchByKeyword(keyword)
-    data = []
+        else:
+            conn = Connection(current_app.config)
+            data = list_partners(conn)
 
     return render_template("sender_listing.html", data=data)
 
